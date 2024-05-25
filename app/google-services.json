@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1012602673828",
+    "firebase_url": "https://finalchessprojectdb-default-rtdb.firebaseio.com",
+    "project_id": "finalchessprojectdb",
+    "storage_bucket": "finalchessprojectdb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1012602673828:android:fcb1ece2f9bf96fb2aa431",
+        "android_client_info": {
+          "package_name": "com.example.finalchessproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCjMNntbma3pwCPADX2kquH_ewH5F0WJw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

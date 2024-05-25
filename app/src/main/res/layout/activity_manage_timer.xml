@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg"
+    tools:context=".ManageTimer">
+
+    <ImageView
+        android:id="@+id/BlackPickedImageTimer"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/blackknight"
+        android:layout_marginLeft = "245dp"
+        android:layout_marginTop = "280dp"
+        android:visibility="invisible"
+        />
+    <ImageView
+        android:id="@+id/WhitePickedImageTimer"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/whiteknight"
+        android:layout_marginLeft = "25dp"
+        android:layout_marginTop = "280dp"
+        android:visibility="invisible"
+        />
+
+
+    <TextView
+        android:id="@+id/WelcomeToTimerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Choose Time Contorls !"
+        android:layout_marginTop="50dp"
+        android:textSize="50dp"
+        tools:layout_editor_absoluteX="133dp"
+        tools:layout_editor_absoluteY="63dp" />
+
+    <TextView
+        android:id="@+id/BlackPiecesTimerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Black Player:"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:layout_marginLeft = "240dp"
+        android:layout_marginTop = "250dp"/>
+
+
+    <EditText
+        android:id="@+id/BlackPiecesTimerInput"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="240dp"
+        android:layout_marginTop="280dp"
+        android:minHeight="48dp" />
+
+    <TextView
+        android:id="@+id/WhitePiecesTimerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="White Player:"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:layout_marginLeft = "20dp"
+        android:layout_marginTop = "250dp"/>
+
+    <EditText
+        android:id="@+id/WhitePiecesTimerInput"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="280dp"
+        android:layout_marginLeft="20dp" />
+
+    <Button
+        android:id="@+id/SetBlackTimerButton"
+        android:layout_width="75dp"
+        android:layout_height="40dp"
+        android:text="Set !"
+        android:layout_marginTop="330dp"
+        android:layout_marginLeft="260dp"
+        android:textSize="15dp"/>
+
+    <Button
+        android:id="@+id/SetWhiteTimerButton"
+        android:layout_width="75dp"
+        android:layout_height="40dp"
+        android:text="Set !"
+        android:layout_marginTop="330dp"
+        android:layout_marginLeft="40dp"
+        android:textSize="15dp"/>
+
+    <Button
+        android:id="@+id/CancelBlackTimerButton"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:text="Cancel"
+        android:layout_marginTop="370dp"
+        android:layout_marginLeft="245dp"
+        android:visibility="invisible"
+        android:clickable="false"
+        android:textSize="15dp"/>
+
+    <Button
+        android:id="@+id/CancelWhiteTimerButton"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:text="Cancel"
+        android:layout_marginTop="370dp"
+        android:layout_marginLeft="25dp"
+        android:visibility="invisible"
+        android:clickable="false"
+        android:textSize="15dp"/>
+
+
+    <Button
+        android:id="@+id/TimerStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="115dp"
+        android:layout_marginTop="430dp"
+        android:text="Start !"
+        android:textSize="40dp" />
+
+</RelativeLayout>
