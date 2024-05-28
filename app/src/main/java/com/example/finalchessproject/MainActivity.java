@@ -517,6 +517,7 @@ public class MainActivity extends AppCompatActivity {
                 myRelativeLayout.removeView(pieces[i][j].GetImageView());
                 myRelativeLayout.addView(pieces[i][j].GetImageView(), layoutParamsrook);
                 king.MoveCastle(pieces[i][j]);
+                turn++;
                 addMoveToLog("O-O");
                 SoundPlayer.playSound(this, R.raw.castle);
                 DidCastle = true;
@@ -533,14 +534,13 @@ public class MainActivity extends AppCompatActivity {
                 myRelativeLayout.removeView(pieces[i][j].GetImageView());
                 myRelativeLayout.addView(pieces[i][j].GetImageView(), layoutParams2);
                 king.MoveCastle(pieces[i][j]);
+                turn++;
                 addMoveToLog("O-O-O");
                 SoundPlayer.playSound(this, R.raw.castle);
                 DidCastle = true;
             }
-            turn++;
             RemoveAllPossibleMoves();
-            RemoveCheckAlert((King)piece.FindKing("black"), false);
-            RemoveCheckAlert((King)piece.FindKing("white"), false);
+
             if (turn % 2 == 0) {
                 boolean isChecked = piece.IsChecked(piece.FindKing("white"));
                 ShowCheckAlert((King)piece.FindKing("white"), isChecked);
@@ -551,6 +551,8 @@ public class MainActivity extends AppCompatActivity {
                 startTimer(false); // Start timer for black player's turn
             }
         }
+        RemoveCheckAlert((King)piece.FindKing("black"), false);
+        RemoveCheckAlert((King)piece.FindKing("white"), false);
         if (piece.CanMove(pieces[i][j], false) && !DidCastle){
             RelativeLayout.LayoutParams layoutParams1 = (RelativeLayout.LayoutParams) piece.GetImageView().getLayoutParams();
             layoutParams1.topMargin = width/6 + (width/8)*(i-1);
@@ -562,7 +564,6 @@ public class MainActivity extends AppCompatActivity {
                     RemoveEatenPiece(i - pawn.ReturnPawnInc(),j);
                 }
             }
-            //System.out.println(i + " " + j);
             RemoveEatenPiece(i,j);
             if (pieces[i][j].GetColor() == "white" || pieces[i][j].GetColor() == "black")
             {

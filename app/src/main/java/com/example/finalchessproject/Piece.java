@@ -88,11 +88,11 @@ public class Piece {
         return null;
     }
     public void Move(Piece piece, int i, int j){
-            this.board[piece.GetI()][piece.GetJ()] = new Piece(piece.GetI(), piece.GetJ(), piece.GetBoard(),"gray", null);
-            this.board[i][j] = piece;
-            piece.SetI(i);
-            piece.SetJ(j);
-            this.NumOfMovesInGame++;
+        this.board[piece.GetI()][piece.GetJ()] = new Piece(piece.GetI(), piece.GetJ(), piece.GetBoard(),"gray", null);
+        this.board[i][j] = piece;
+        piece.SetI(i);
+        piece.SetJ(j);
+        this.NumOfMovesInGame++;
     }
     public boolean IsPinned(int i, int j, Piece piece){
         if (i > 7 || i < 0){return true;}
