@@ -26,72 +26,67 @@
         android:visibility="invisible"
         android:alpha="0.5"/>
 
-    <ImageView
-        android:id="@+id/BlackChosenPiece"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="530dp"
-        android:layout_marginLeft="295dp"
-        android:adjustViewBounds="true"
-        android:maxWidth="60dp"
-        android:maxHeight="60dp"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/blackknight"/>
-
-    <ImageView
-        android:id="@+id/WhiteChosenPiece"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="530dp"
-        android:layout_marginLeft="85dp"
-        android:adjustViewBounds="true"
-        android:maxWidth="60dp"
-        android:maxHeight="60dp"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/whiteknight"/>
-
-    <TextView
-        android:id="@+id/TimerWhite"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="@android:color/black"
-        android:layout_marginTop="530dp"
-        android:layout_marginLeft="25dp"
-        android:text="00:00" />
+        android:orientation="horizontal"
+        android:layout_marginTop="550dp">
 
-    <TextView
-        android:id="@+id/TimerBlack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="@android:color/black"
-        android:layout_marginTop="530dp"
-        android:layout_marginLeft="335dp"
-        android:text="00:00" />
+        <ImageView
+            android:id="@+id/BlackChosenPiece"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/blackpawn" />
 
-    <TextView
-        android:id="@+id/WhitePlayerName"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/BlackPlayerName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:padding="8dp" />
+
+        <TextView
+            android:id="@+id/TimerBlack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:padding="8dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="left"
-        android:text="PlayerNum1"
-        android:textSize="20dp"
+        android:orientation="horizontal"
         android:layout_marginTop="500dp"
-        />
-    <TextView
-        android:id="@+id/BlackPlayerName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:text="PlayerNum2"
-        android:textSize="20dp"
-        android:layout_marginTop="500dp"
-        />
+        >
+
+        <ImageView
+            android:id="@+id/WhiteChosenPiece"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/whitepawn" />
+
+        <TextView
+            android:id="@+id/WhitePlayerName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:padding="8dp" />
+
+        <TextView
+            android:id="@+id/TimerWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:padding="8dp" />
+    </LinearLayout>
 
 
     <ImageView

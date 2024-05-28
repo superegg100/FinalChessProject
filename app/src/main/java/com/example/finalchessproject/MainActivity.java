@@ -70,36 +70,12 @@ public class MainActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference gamesRef = database.getReference("Games");
 
-        /*
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("user");
-        myRef.setValue("test");
-
-        myRef = database.getReference();
-        DatabaseReference readRef = myRef.child("Games").child(username);
-        readRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                Long value = snapshot.getValue(long.class);
-                if (value != null){
-                    highScore = value;
-                }
-                else{
-                    highScore = (long) -1;
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                highScore = (long) -1;
-            }
-        });
-
-         */
-
         RelativeLayout.LayoutParams layoutParams = NewLayout();
+
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int width = displayMetrics.widthPixels;
+
         frame = findViewById(R.id.frm);
 
         Intent intentGame = getIntent();
@@ -128,16 +104,9 @@ public class MainActivity extends AppCompatActivity {
         timerBlackText = findViewById(R.id.TimerBlack);
         timerWhiteText = findViewById(R.id.TimerWhite);
 
+        timerBlackText.setText(formatTime(remainingTimeBlack));
+
         moveLog = findViewById(R.id.move_log);
-
-        /*
-        currentGame = new Game(intentGame.getStringExtra("whiteName"),
-                intentGame.getStringExtra("whiteTime"),
-                intentGame.getStringExtra("blackName"),
-                intentGame.getStringExtra("blackTime"),
-                moveLogToAddToFireBase);
-
-         */
 
         PBQ = findViewById(R.id.PBQ);
         PBQ.setClickable(false);
@@ -171,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         PWKN.setClickable(false);
         PWKN.setVisibility(View.INVISIBLE);
 
-        boardGame = new BoardGame(this);
+        boardGame = new BoardGame(this, displayMetrics.widthPixels/6);
 
         frame.addView(boardGame);
         //iv.setVisibility(View.INVISIBLE);
@@ -184,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
         //**rook**\\
         iv = findViewById(R.id.imageView14);
         myRelativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
+
 
         for (int i = 0; i<8; i++){
             for (int j = 0; j<8; j++){
@@ -657,8 +627,8 @@ public class MainActivity extends AppCompatActivity {
         if (pieces[row][col].HasPiece())
         {
             if (piece instanceof Pawn) {
-            return FILES[prevColOfPawnForMoveList] + "x" + getSquareName(row, col);
-        }
+                return FILES[prevColOfPawnForMoveList] + "x" + getSquareName(row, col);
+            }
 
             return piece.GetType() + "x" + getSquareName(row, col);
         }
@@ -788,7 +758,7 @@ public class MainActivity extends AppCompatActivity {
     private void RemoveAllPossibleMoves() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                    possibleMoves[i][j].getGrayCircle().setVisibility(View.INVISIBLE);
+                possibleMoves[i][j].getGrayCircle().setVisibility(View.INVISIBLE);
             }
         }
     }
