@@ -10,7 +10,7 @@ import android.os.IBinder;
 public class MediaPlayerService extends Service {
     private MediaPlayer mediaPlayer;
     private final IBinder binder = new LocalBinder();
-    private float lowVolume = 0.035f; // Adjust this value for your desired low volume level
+    private float lowVolume = 0.035f;
 
     public class LocalBinder extends Binder {
         MediaPlayerService getService() {
@@ -27,8 +27,8 @@ public class MediaPlayerService extends Service {
     public void onCreate() {
         super.onCreate();
         mediaPlayer = MediaPlayer.create(this, R.raw.bg_music);
-        mediaPlayer.setLooping(true); // Loop the music
-        mediaPlayer.setVolume(lowVolume, lowVolume); // Set the volume to low
+        mediaPlayer.setLooping(true);
+        mediaPlayer.setVolume(lowVolume, lowVolume);
     }
 
     public void startMusic() {

@@ -2,11 +2,9 @@ package com.example.finalchessproject;
 
 import android.widget.ImageView;
 
-import java.util.Locale;
-
 public class Pawn extends Piece{
     private int NumOfMoves;
-    private int PawnInc;
+    private int PawnInc; // determines if the pawn goes up the board or down
     private int MoveWhenPlayed;
     private Boolean IsEnPeasent;
     public Pawn(int i, int j, Piece[][] board,String color, ImageView imageView){
@@ -40,6 +38,8 @@ public class Pawn extends Piece{
     public boolean HasPiece(){
         return true;
     }
+
+    //Checks if this piece can move to the square it wants
     @Override
     public boolean CanMove(Piece piece, boolean bool)
     {
@@ -74,6 +74,7 @@ public class Pawn extends Piece{
         }
         return false;
     }
+    //Moves the piece
     public void Move(Piece piece, int i, int j){
         super.IncNumOfMovesInGame();
         super.GetBoard()[piece.GetI()][piece.GetJ()] = new Piece(piece.GetI(), piece.GetJ(), piece.GetBoard(),"gray", null);
@@ -95,6 +96,7 @@ public class Pawn extends Piece{
         return this.PawnInc;
     }
 
+    //Checks if this piece can save the king from checkmate
     @Override
     public boolean CanEscapeCheckMate() {
         if (this.CanMove(super.GetBoard()[super.GetI()+this.PawnInc][super.GetJ()], false)){

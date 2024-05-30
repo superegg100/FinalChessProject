@@ -40,6 +40,7 @@ public class Queen extends Piece{
         }
         return x;
     }
+    //Checks if this piece can move the square it wants
     public boolean CanMoveDiagonally(Piece piece){
         if (piece.GetColor() == super.GetColor()){
             return false;
@@ -71,6 +72,7 @@ public class Queen extends Piece{
         }
         return false;
     }
+    //Checks if this piece can move the square it wants
     public boolean CanMoveLine(Piece piece) {
         if (super.GetI() != piece.GetI() && super.GetJ() != piece.GetJ()){ return false; }
         if (piece.GetColor() == super.GetColor()){
@@ -107,6 +109,7 @@ public class Queen extends Piece{
         return true;
     }
 
+    //Checks if this piece can save the king from checkmate
     @Override
     public boolean CanEscapeCheckMate() {
         int i = 1;

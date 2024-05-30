@@ -1,4 +1,5 @@
 package com.example.finalchessproject;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,18 +14,22 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
     private ArrayList<Game> gameList;
     private OnItemClickListener listener;
 
+    // Interface for handling item click events
     public interface OnItemClickListener {
         void onItemClick(int position);
     }
 
+    // Setter for the item click listener
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
 
+    // Constructor to initialize the adapter with a list of games
     public GameAdapter(ArrayList<Game> gameList) {
         this.gameList = gameList;
     }
 
+    // ViewHolder class to hold references to views for each item in the list
     public static class GameViewHolder extends RecyclerView.ViewHolder {
         public TextView textViewGameInfo;
         public TextView textViewGameDate;
@@ -49,6 +54,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
     @NonNull
     @Override
     public GameViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // Inflate the layout for each item in the list
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.game_item, parent, false);
         return new GameViewHolder(view);
     }
@@ -56,16 +62,17 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
     @Override
     public void onBindViewHolder(@NonNull GameViewHolder holder, int position) {
         Game currentGame = gameList.get(position);
+        // Bind data to the views in each ViewHolder
         holder.textViewGameInfo.setText(currentGame.getWhiteName() + " vs " + currentGame.getBlackName());
-        holder.textViewGameDate.setText(currentGame.getDate()); // Add date here
+        holder.textViewGameDate.setText(currentGame.getDate());
 
-        // Set the winner's name and icons
-        if (checkFirstWordOfWinner(currentGame.getWinner(),currentGame.getWhiteName())) {
+        // Determine and set the winner's information
+        if (checkFirstWordOfWinner(currentGame.getWinner(), currentGame.getWhiteName())) {
             holder.textViewGameWinner.setText(currentGame.getWhiteName());
             holder.imageViewWinnerIcon.setVisibility(View.VISIBLE);
             holder.imageViewWinnerPieceColor.setVisibility(View.VISIBLE);
             holder.imageViewWinnerPieceColor.setImageResource(R.drawable.whitepawn);
-        } else if (checkFirstWordOfWinner(currentGame.getWinner(),currentGame.getBlackName())) {
+        } else if (checkFirstWordOfWinner(currentGame.getWinner(), currentGame.getBlackName())) {
             holder.textViewGameWinner.setText(currentGame.getBlackName());
             holder.imageViewWinnerIcon.setVisibility(View.VISIBLE);
             holder.imageViewWinnerPieceColor.setVisibility(View.VISIBLE);
@@ -76,6 +83,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
             holder.imageViewWinnerPieceColor.setVisibility(View.GONE);
         }
 
+        // Handle item click events
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +102,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
         return gameList.size();
     }
 
+    // Method to check if the first word of the winner's name matches a specified name
     public boolean checkFirstWordOfWinner(String input, String wordToCheck) {
         if (input == null || input.isEmpty()) {
             return false;

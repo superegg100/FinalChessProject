@@ -137,4 +137,15 @@
         android:textSize="24sp"
         android:padding="12dp" />
 
+    <Button
+        android:id="@+id/buttonReturnToWelcome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Return to Welcome Screen"
+        android:textSize="18sp"
+        android:background="@drawable/button_background"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="160dp"
+        android:layout_marginHorizontal="16dp"/>
+
 </LinearLayout>

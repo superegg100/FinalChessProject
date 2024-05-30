@@ -3,6 +3,8 @@ package com.example.finalchessproject;
 import android.widget.ImageView;
 
 public class Knight extends Piece{
+
+    //Constructor
     public Knight(int i, int j, Piece[][] board, String color, ImageView imageView){
         super(i,j, board, color, imageView);
         if (super.GetColor() == "white"){
@@ -24,6 +26,8 @@ public class Knight extends Piece{
     public boolean HasPiece(){
         return true;
     }
+
+    //Checks if this piece can move the square it wants
     @Override
     public boolean CanMove(Piece piece, boolean bool)
     {
@@ -81,6 +85,7 @@ public class Knight extends Piece{
         return false;
     }
 
+    //Checks if this piece can save the king from checkmate
     @Override
     public boolean CanEscapeCheckMate() {
         if (!IsPinned(super.GetI() + 2, super.GetJ() + 1, this)){

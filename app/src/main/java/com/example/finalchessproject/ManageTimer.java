@@ -20,7 +20,7 @@ public class ManageTimer extends AppCompatActivity {
 
     ImageView blackImage_t, whiteImage_t;
     TextView blackNameText_t, whiteNameText_t;
-    Button start_t, setBlack_t, setWhite_t, cancelWhite_t, cancelBlack_t;
+    Button start_t, setBlack_t, setWhite_t, cancelWhite_t, cancelBlack_t, butttonReturnToWelcome;
     EditText blackNameInput_t, whiteNameInput_t;
 
     private long BlackTime, WhiteTime;
@@ -68,6 +68,14 @@ public class ManageTimer extends AppCompatActivity {
         whiteNameInput_t = findViewById(R.id.WhitePiecesTimerInput);
         blackNameText_t = findViewById(R.id.BlackPiecesTimerText);
         whiteNameText_t = findViewById(R.id.WhitePiecesTimerText);
+        butttonReturnToWelcome = findViewById(R.id.buttonReturnToWelcome);
+
+        butttonReturnToWelcome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         setBlack_t.setOnClickListener(new View.OnClickListener() {
             @Override

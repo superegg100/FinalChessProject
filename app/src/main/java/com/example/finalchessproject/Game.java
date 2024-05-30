@@ -1,7 +1,5 @@
 package com.example.finalchessproject;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -13,13 +11,11 @@ public class Game {
     private String blackTime;
     private String moveList;
     private String winner;
-    private String date; // Add this line
+    private String date;
 
-    // No-argument constructor (required by Firebase)
     public Game() {
     }
 
-    // Constructor with arguments
     public Game(String whiteName, String whiteTime, String blackName, String blackTime, String moveList, String winner) {
         this.whiteName = whiteName;
         this.whiteTime = whiteTime;
@@ -27,10 +23,9 @@ public class Game {
         this.blackTime = blackTime;
         this.moveList = moveList;
         this.winner = winner;
-        this.date = getCurrentDate(); // Add this line
+        this.date = getCurrentDate();
     }
 
-    // Getter and setter methods
     public String getWhiteName() {
         return whiteName;
     }
@@ -87,7 +82,6 @@ public class Game {
         this.date = date;
     }
 
-    // Method to get the current date
     private String getCurrentDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault());
         return dateFormat.format(new Date());

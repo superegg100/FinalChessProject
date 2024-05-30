@@ -66,6 +66,7 @@ public class Rook extends Piece{
         }
         return true;
     }
+    //Moves the piece
     public void Move(Piece piece, int i, int j){
         this.GetBoard()[piece.GetI()][piece.GetJ()] = new Piece(piece.GetI(), piece.GetJ(), piece.GetBoard(),"gray", GetImageView());;
         this.GetBoard()[i][j] = piece;
@@ -75,6 +76,7 @@ public class Rook extends Piece{
         this.NumOfMoves++;
     }
 
+    //Checks if this piece can save the king from checkmate
     @Override
     public boolean CanEscapeCheckMate() {
         for (int x = 1; super.GetJ() + x < 8; x++){

@@ -1,5 +1,6 @@
 package com.example.finalchessproject;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,77 +11,84 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Objects;
+
 public class AndTheWinnerIs extends AppCompatActivity {
 
-    ImageView blackWonImage, whiteWonImage;
-    TextView theWinnerText, playingText, byText;
+    // Declare views and buttons
+    ImageView blackWonImage, whiteWonImage, drawImage;
+    TextView theWinnerText, playingText, byText ,drawText;
 
     Button restartBtn, quitBtn, returnBtn;
 
     Handler handler;
 
-    private static final int NUM_FRAMES = 30; // Number of frames in the animation
-    private static final int FRAME_DURATION_MS = 150; // Duration between frames in milliseconds
+    // Animation constants
+    private static final int NUM_FRAMES = 30;
+    private static final int FRAME_DURATION_MS = 150;
 
-    private static int currentFrameIndex = 1; // Start from the first frame
+    private static int currentFrameIndex = 1;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_and_the_winner_is);
         Intent intent = getIntent();
 
+        // Initialize views and buttons
         byText = findViewById(R.id.By);
         theWinnerText = findViewById(R.id.WinnerText);
         playingText = findViewById(R.id.Playing);
         blackWonImage = findViewById(R.id.BlackWonImage);
         whiteWonImage = findViewById(R.id.WhiteWonImage);
+        drawImage = findViewById(R.id.DrawImage);
 
         quitBtn = findViewById(R.id.QuitButton);
         restartBtn = findViewById(R.id.RestartButton);
         returnBtn = findViewById(R.id.ReturnButton);
 
-        returnBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AndTheWinnerIs.this, Introduction.class);
-                startActivity(intent);
-            }
+        // Set button click listeners
+        returnBtn.setOnClickListener(v -> {
+            Intent intent1 = new Intent(AndTheWinnerIs.this, Introduction.class);
+            startActivity(intent1);
         });
-        restartBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-                System.exit(0);
-            }
+        restartBtn.setOnClickListener(v -> {
+            finish();
+            System.exit(0);
         });
 
-        quitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finishAffinity();
-            }
-        });
+        quitBtn.setOnClickListener(v -> finishAffinity());
 
-        byText.setText("By: " + intent.getStringExtra("Way") + " !");
-        theWinnerText.setText("The Winner is:\n" + intent.getStringExtra("Winner") + " !");
-        if (intent.getStringExtra("WinnerColor").equals("white")) {
-            whiteWonImage.setVisibility(View.VISIBLE);
-        } else {
-            blackWonImage.setVisibility(View.VISIBLE);
+        if (intent.getStringExtra("Winner").equals("Draw"))
+        {
+            theWinnerText.setText("Draw");
+            playingText.setText("");
+            byText.setText("");
+            drawImage.setVisibility(View.VISIBLE);
         }
-
+        else
+        {
+            // Set text and images based on intent extras
+            byText.setText("By: " + intent.getStringExtra("Way") + " !");
+            theWinnerText.setText("The Winner is:\n" + intent.getStringExtra("Winner") + " !");
+            if (Objects.equals(intent.getStringExtra("WinnerColor"), "white")) {
+                whiteWonImage.setVisibility(View.VISIBLE);
+            } else {
+                blackWonImage.setVisibility(View.VISIBLE);
+            }
+        }
         handler = new Handler();
 
         // Start the animation loop
         startAnimation();
     }
 
+    // Method to start the animation loop
     private void startAnimation() {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                // Update image frames in your animation
                 setImage(R.id.imageView1);
                 setImage(R.id.imageView2);
                 setImage(R.id.imageView3);
@@ -92,38 +100,34 @@ public class AndTheWinnerIs extends AppCompatActivity {
                 setImage(R.id.imageView11);
                 setImage(R.id.imageView12);
 
-                // Move to the next frame
                 currentFrameIndex++;
 
-                // Reset to the first frame if it exceeds the maximum frames
                 if (currentFrameIndex > NUM_FRAMES) {
                     currentFrameIndex = 1;
                 }
 
-                // Continue the animation loop
                 handler.postDelayed(this, FRAME_DURATION_MS);
             }
         }, FRAME_DURATION_MS);
     }
 
+    // Method to set the image for the animation
     private void setImage(int imageViewId) {
         ImageView imageView = findViewById(imageViewId);
         String drawableName = "star_anim_" + currentFrameIndex;
-        int resId = getResources().getIdentifier(drawableName, "drawable", getPackageName());
+        @SuppressLint("DiscouragedApi") int resId = getResources().getIdentifier(drawableName, "drawable", getPackageName());
         imageView.setImageResource(resId);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        // Pause animation if needed
         handler.removeCallbacksAndMessages(null);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        // Resume animation if needed
         startAnimation();
     }
 }

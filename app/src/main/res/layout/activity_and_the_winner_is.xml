@@ -42,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/Playing"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="140dp" />
 
     <ImageView
         android:id="@+id/BlackWonImage"
@@ -52,7 +52,18 @@
         app:layout_constraintTop_toBottomOf="@+id/Playing"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="1dp"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/DrawImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/draw_image"
+        app:layout_constraintTop_toBottomOf="@+id/Playing"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="1dp"
         android:visibility="invisible" />
 
     <ImageView
@@ -63,7 +74,7 @@
         app:layout_constraintTop_toBottomOf="@+id/Playing"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="1dp"
         android:visibility="invisible" />
 
     <Button
@@ -71,7 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Restart"
-        app:layout_constraintTop_toBottomOf="@+id/BlackWonImage"
+        app:layout_constraintTop_toBottomOf="@+id/DrawImage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="50dp" />

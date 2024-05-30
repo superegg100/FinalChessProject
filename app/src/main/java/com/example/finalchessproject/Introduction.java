@@ -41,7 +41,6 @@ public class Introduction extends AppCompatActivity {
             mediaPlayerService = binder.getService();
             isServiceBound = true;
 
-            // Start or resume music when the service is connected
             if (!mediaPlayerService.isMusicPlaying()) {
                 mediaPlayerService.resumeMusic();
             }
