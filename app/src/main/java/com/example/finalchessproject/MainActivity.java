@@ -1,6 +1,7 @@
 package com.example.finalchessproject;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -59,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
     private long remainingTimeWhite;
     private long remainingTimeBlack;
     private TextView moveLog;
+    private FrameLayout blackPlayerFrame;
+    private FrameLayout whitePlayerFrame;
     ImageButton PBQ, PBR, PBKN, PBB, PWR, PWB, PWQ, PWKN;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
         int width = displayMetrics.widthPixels;
 
         frame = findViewById(R.id.frm);
+        blackPlayerFrame = findViewById(R.id.blackPlayerFrame);
+        whitePlayerFrame = findViewById(R.id.whitePlayerFrame);
 
         Intent intentGame = getIntent();
 
@@ -421,7 +426,18 @@ public class MainActivity extends AppCompatActivity {
         king = (King)FindKing("black");
 
         startTimer(true);
+        showTurn(true);
 
+    }
+
+    private void showTurn(boolean isWhiteTurn) {
+        if (isWhiteTurn) {
+            whitePlayerFrame.setBackgroundResource(R.drawable.frame_border); // Show the frame
+            blackPlayerFrame.setBackgroundResource(0); // Hide the frame
+        } else {
+            whitePlayerFrame.setBackgroundResource(0); // Hide the frame
+            blackPlayerFrame.setBackgroundResource(R.drawable.frame_border); // Show the frame
+        }
     }
     public void AddGameToFireBase(String winner){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -545,10 +561,12 @@ public class MainActivity extends AppCompatActivity {
                 boolean isChecked = piece.IsChecked(piece.FindKing("white"));
                 ShowCheckAlert((King)piece.FindKing("white"), isChecked);
                 startTimer(true); // Start timer for white player's turn
+                showTurn(true);
             } else {
                 boolean isChecked = piece.IsChecked(piece.FindKing("black"));
                 ShowCheckAlert((King)piece.FindKing("black"), isChecked);
                 startTimer(false); // Start timer for black player's turn
+                showTurn(false);
             }
         }
         RemoveCheckAlert((King)piece.FindKing("black"), false);
@@ -613,10 +631,12 @@ public class MainActivity extends AppCompatActivity {
                 boolean isChecked = piece.IsChecked(piece.FindKing("white"));
                 ShowCheckAlert((King)piece.FindKing("white"), isChecked);
                 startTimer(true); // Start timer for white player's turn
+                showTurn(true);
             } else {
                 boolean isChecked = piece.IsChecked(piece.FindKing("black"));
                 ShowCheckAlert((King)piece.FindKing("black"), isChecked);
                 startTimer(false); // Start timer for black player's turn
+                showTurn(false);
             }
         }
         DidCastle = false;

@@ -19,9 +19,6 @@
             android:name=".GameListActivity"
             android:exported="false" />
         <activity
-            android:name=".AllGamesDb"
-            android:exported="false" />
-        <activity
             android:name=".ManageTimer"
             android:exported="false" />
         <activity

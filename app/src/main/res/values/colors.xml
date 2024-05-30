@@ -7,5 +7,12 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="GoldenColor">#ED9718</color>
-        <!-- Add more colors as needed -->
+
+    <!-- Dark theme colors -->
+    <color name="colorPrimaryDarkTheme">#1F1B24</color>
+    <color name="colorPrimaryDarkDarkTheme">#121212</color>
+    <color name="colorAccentDarkTheme">#BB86FC</color>
+    <color name="windowBackgroundDarkTheme">#121212</color>
+    <color name="textColorPrimaryDarkTheme">#FFFFFF</color>
+    <color name="textColorSecondaryDarkTheme">#616161</color>
 </resources>
