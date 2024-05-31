@@ -145,7 +145,6 @@ public class King extends Piece {
 
     // Checks if the king is in a checkmate position
     public boolean IsCheckMated(){
-        System.out.println("Yo hegati lw checkematoda");
         if (super.GetI()+1 < 8 && !(super.GetBoard()[super.GetI()+1][super.GetJ()].GetColor() == super.GetColor()) && !IsPinned(super.GetI()+1, super.GetJ(), this)){System.out.println("nafalti in 1"); return false;}
         if (super.GetI()-1 >= 0 && !(super.GetBoard()[super.GetI()-1][super.GetJ()].GetColor() == super.GetColor()) && !IsPinned(super.GetI()-1, super.GetJ(), this)){System.out.println("nafalti in 2"); return false;}
 
@@ -161,7 +160,6 @@ public class King extends Piece {
         for (int i = 0; i < 8; i++){
             for (int j = 0; j < 8; j++){
                 if(super.GetColor() == super.GetBoard()[i][j].GetColor() && super.GetBoard()[i][j].CanEscapeCheckMate()){
-                    System.out.println("nafalti in 9" + " and" + i + " " + j);
                     return false;
                 }
             }

@@ -166,7 +166,8 @@ public class ManageTimer extends AppCompatActivity {
         start_t.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isNumeric(whiteNameInput_t.getText().toString()) && isNumeric(blackNameInput_t.getText().toString()) && setWhite_t.getVisibility() == View.INVISIBLE && setBlack_t.getVisibility() == View.INVISIBLE)
+                if (isNumeric(whiteNameInput_t.getText().toString()) && isNumeric(blackNameInput_t.getText().toString()) &&
+                        setWhite_t.getVisibility() == View.INVISIBLE && setBlack_t.getVisibility() == View.INVISIBLE)
                 {
                     Intent intent = new Intent(ManageTimer.this, MainActivity.class);
                     intent.putExtra("blackTime", String.valueOf(BlackTime));

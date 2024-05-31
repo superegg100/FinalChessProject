@@ -141,8 +141,10 @@ public class Introduction extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (whiteNameText.toString().length() >= 3 && whiteNameInput.getText().toString().length() <= 12 && isAlphanumeric(whiteNameInput.getText().toString()) && setWhite.getVisibility() == View.INVISIBLE &&
-                blackNameText.toString().length() >= 3 && blackNameInput.getText().toString().length() <= 12 && isAlphanumeric(blackNameInput.getText().toString()) && setBlack.getVisibility() == View.INVISIBLE)
+                if (whiteNameText.toString().length() >= 3 && whiteNameInput.getText().toString().length() <= 12 &&
+                        isAlphanumeric(whiteNameInput.getText().toString()) && setWhite.getVisibility() == View.INVISIBLE &&
+                        blackNameText.toString().length() >= 3 && blackNameInput.getText().toString().length() <= 12 &&
+                        isAlphanumeric(blackNameInput.getText().toString()) && setBlack.getVisibility() == View.INVISIBLE)
                 {
                     Intent intent = new Intent(Introduction.this, ManageTimer.class);
                     intent.putExtra("blackName", blackNameInput.getText().toString());
