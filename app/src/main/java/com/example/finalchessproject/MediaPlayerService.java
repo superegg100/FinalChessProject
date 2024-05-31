@@ -31,12 +31,6 @@ public class MediaPlayerService extends Service {
         mediaPlayer.setVolume(lowVolume, lowVolume);
     }
 
-    public void startMusic() {
-        if (!mediaPlayer.isPlaying()) {
-            mediaPlayer.start();
-        }
-    }
-
     public void pauseMusic() {
         if (mediaPlayer.isPlaying()) {
             mediaPlayer.pause();

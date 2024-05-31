@@ -74,7 +74,7 @@ public class Introduction extends AppCompatActivity {
         setBlack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (blackNameInput.getText().toString().length() >= 3 && blackNameInput.getText().toString().length() <= 9 && isAlphanumeric(blackNameInput.getText().toString())){
+                if (blackNameInput.getText().toString().length() >= 3 && blackNameInput.getText().toString().length() <= 12 && isAlphanumeric(blackNameInput.getText().toString())){
                     blackNameText.setText(blackNameInput.getText().toString());
                     blackNameText.setGravity(Gravity.CENTER);
                     setBlack.setClickable(false);
@@ -86,7 +86,7 @@ public class Introduction extends AppCompatActivity {
                     blackImage.setVisibility(View.VISIBLE);
                 }
                 else{
-                    Toast.makeText(Introduction.this, "Name needs to be between 3-9 characters long and consist of letters and numbers only !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Introduction.this, "Name needs to be between 3-12 characters long and consist of letters and numbers only !", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -94,7 +94,7 @@ public class Introduction extends AppCompatActivity {
         setWhite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (whiteNameInput.getText().toString().length() >= 3 && whiteNameInput.getText().toString().length() <= 9 && isAlphanumeric(whiteNameInput.getText().toString())){
+                if (whiteNameInput.getText().toString().length() >= 3 && whiteNameInput.getText().toString().length() <= 12 && isAlphanumeric(whiteNameInput.getText().toString())){
                     whiteNameText.setText(whiteNameInput.getText().toString());
                     whiteNameText.setGravity(Gravity.CENTER);
                     setWhite.setClickable(false);
@@ -106,7 +106,7 @@ public class Introduction extends AppCompatActivity {
                     whiteImage.setVisibility(View.VISIBLE);
                 }
                 else{
-                    Toast.makeText(Introduction.this, "Name needs to be between 3-9 characters long and consist of letters and numbers only !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Introduction.this, "Name needs to be between 3-12 characters long and consist of letters and numbers only !", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -141,8 +141,8 @@ public class Introduction extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (whiteNameText.toString().length() >= 3 && whiteNameInput.getText().toString().length() <= 9 && isAlphanumeric(whiteNameInput.getText().toString()) && setWhite.getVisibility() == View.INVISIBLE &&
-                blackNameText.toString().length() >= 3 && blackNameInput.getText().toString().length() <= 9 && isAlphanumeric(blackNameInput.getText().toString()) && setBlack.getVisibility() == View.INVISIBLE)
+                if (whiteNameText.toString().length() >= 3 && whiteNameInput.getText().toString().length() <= 12 && isAlphanumeric(whiteNameInput.getText().toString()) && setWhite.getVisibility() == View.INVISIBLE &&
+                blackNameText.toString().length() >= 3 && blackNameInput.getText().toString().length() <= 12 && isAlphanumeric(blackNameInput.getText().toString()) && setBlack.getVisibility() == View.INVISIBLE)
                 {
                     Intent intent = new Intent(Introduction.this, ManageTimer.class);
                     intent.putExtra("blackName", blackNameInput.getText().toString());
