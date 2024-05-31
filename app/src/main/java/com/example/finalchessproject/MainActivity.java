@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String[] FILES = {"a", "b", "c", "d", "e", "f", "g", "h"};
     String whitePlayerName_FromIntent,whitePlayerTime_FromIntent, blackPlayerName_FromIntent, blackPlayerTime_FromIntent, winnerToDb;
     int moveIndicatorScrollViewNum = 1;
-    Game currentGame;
     String moveName;
     int prevColOfPawnForMoveList;
     TextView whitePlayerName, blackPlayerName, timerWhiteText, timerBlackText;
@@ -43,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     boolean IsClicked = false;
     int turn = 0;
     long whiteTotalTime, blackTotalTime;
-    boolean DidPromote = false, DidCastle = false, pieceFlag = false;
+    boolean DidPromote = false, DidCastle = false;
     King king;
     String moveLogToAddToFireBase;
     private CountDownTimer timerWhite;
@@ -537,17 +536,19 @@ public class MainActivity extends AppCompatActivity {
             moveName = MoveName(piece, j, i);
             piece.Move(piece, i, j);
             addMoveToLog(moveName);
-            IsPromotable(piece, pieces);
+            if (piece instanceof Pawn)
+            {
+                IsPromotable(piece, pieces);
+            }
             if((king1.IsCheckMated())){
                 Intent intentWin = new Intent(MainActivity.this, AndTheWinnerIs.class);
                 Intent intentGame = getIntent();
+                SoundPlayer.playSound(this, R.raw.notify);
                 if (king1.GetColor() == "black"){
                     winnerToDb = intentGame.getStringExtra("whiteName") + " Beat " + intentGame.getStringExtra("blackName") + " By Checkmate !";
                     AddGameToFireBase(winnerToDb);
                     intentWin.putExtra("Winner", intentGame.getStringExtra("whiteName"));
                     intentWin.putExtra("WinnerColor", "white");
-                    intentWin.putExtra("Way", "Checkmate");
-                    startActivity(intentWin);
                 }
 
                 else if (king1.GetColor() == "white"){
@@ -555,9 +556,9 @@ public class MainActivity extends AppCompatActivity {
                     AddGameToFireBase(winnerToDb);
                     intentWin.putExtra("Winner", intentGame.getStringExtra("blackName"));
                     intentWin.putExtra("WinnerColor","black");
-                    intentWin.putExtra("Way", "Checkmate");
-                    startActivity(intentWin);
                 }
+                intentWin.putExtra("Way", "Checkmate");
+                startActivity(intentWin);
             }
             if (IsDraw())
             {
@@ -860,233 +861,230 @@ public class MainActivity extends AppCompatActivity {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int width = displayMetrics.widthPixels;
-        if (piece instanceof Pawn)
+        if (piece.GetI() == 7)
         {
-            if (piece.GetI() == 7)
-            {
-                DidPromote = true;
-                PBQ.setVisibility(View.VISIBLE);
-                PBQ.setClickable(true);
-                PBB.setVisibility(View.VISIBLE);
-                PBB.setClickable(true);
-                PBR.setVisibility(View.VISIBLE);
-                PBR.setClickable(true);
-                PBKN.setVisibility(View.VISIBLE);
-                PBKN.setClickable(true);
-                PBQ.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        RelativeLayout.LayoutParams layoutParamsP = NewLayout();
-                        RemoveEatenPiece(7, piece.GetJ());
-                        pieces[7][piece.GetJ()] = new Queen(7,piece.GetJ(),pieces, piece.GetColor(),  new ImageView(MainActivity.this));
-                        layoutParamsP = NewLayout();
-                        layoutParamsP.width = width/8;
-                        layoutParamsP.height = width/8;
-                        layoutParamsP.addRule(RelativeLayout.BELOW, R.id.imageView14);
-                        layoutParamsP.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-                        myRelativeLayout.addView(pieces[7][piece.GetJ()].GetImageView(), layoutParamsP);
-                        layoutParamsP.topMargin = width/6 + (width/8)*(piece.GetI()-1);
-                        layoutParamsP.rightMargin = (width/8)*(7- piece.GetJ());
-                        PBQ.setVisibility(View.INVISIBLE);
-                        PBQ.setClickable(false);
-                        PBB.setVisibility(View.INVISIBLE);
-                        PBB.setClickable(false);
-                        PBR.setVisibility(View.INVISIBLE);
-                        PBR.setClickable(false);
-                        PBKN.setVisibility(View.INVISIBLE);
-                        PBKN.setClickable(false);
-                        DidPromote = false;
-                    }
-                });
-                PBB.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        RelativeLayout.LayoutParams layoutParamsP = NewLayout();
-                        RemoveEatenPiece(7, piece.GetJ());
-                        pieces[7][piece.GetJ()] = new Bishop(7,piece.GetJ(),pieces, piece.GetColor(),  new ImageView(MainActivity.this));
-                        layoutParamsP = NewLayout();
-                        layoutParamsP.width = width/8;
-                        layoutParamsP.height = width/8;
-                        layoutParamsP.addRule(RelativeLayout.BELOW, R.id.imageView14);
-                        layoutParamsP.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-                        myRelativeLayout.addView(pieces[7][piece.GetJ()].GetImageView(), layoutParamsP);
-                        layoutParamsP.topMargin = width/6 + (width/8)*(piece.GetI()-1);
-                        layoutParamsP.rightMargin = (width/8)*(7- piece.GetJ());
-                        PBQ.setVisibility(View.INVISIBLE);
-                        PBQ.setClickable(false);
-                        PBB.setVisibility(View.INVISIBLE);
-                        PBB.setClickable(false);
-                        PBR.setVisibility(View.INVISIBLE);
-                        PBR.setClickable(false);
-                        PBKN.setVisibility(View.INVISIBLE);
-                        PBKN.setClickable(false);
-                        DidPromote = false;
-                    }
-                });
-                PBR.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        RelativeLayout.LayoutParams layoutParamsP = NewLayout();
-                        RemoveEatenPiece(7, piece.GetJ());
-                        pieces[7][piece.GetJ()] = new Rook(7,piece.GetJ(),pieces, piece.GetColor(),  new ImageView(MainActivity.this));
-                        layoutParamsP = NewLayout();
-                        layoutParamsP.width = width/16;
-                        layoutParamsP.height = width/16;
-                        layoutParamsP.addRule(RelativeLayout.BELOW, R.id.imageView14);
-                        layoutParamsP.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-                        myRelativeLayout.addView(pieces[7][piece.GetJ()].GetImageView(), layoutParamsP);
-                        layoutParamsP.topMargin = width/6 + (width/8)*(piece.GetI()-1);
-                        layoutParamsP.rightMargin = (width/8)*(7- piece.GetJ());
-                        PBQ.setVisibility(View.INVISIBLE);
-                        PBQ.setClickable(false);
-                        PBB.setVisibility(View.INVISIBLE);
-                        PBB.setClickable(false);
-                        PBR.setVisibility(View.INVISIBLE);
-                        PBR.setClickable(false);
-                        PBKN.setVisibility(View.INVISIBLE);
-                        PBKN.setClickable(false);
-                        DidPromote = false;
-                    }
-                });
-                PBKN.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        RelativeLayout.LayoutParams layoutParamsP = NewLayout();
-                        RemoveEatenPiece(7, piece.GetJ());
-                        pieces[7][piece.GetJ()] = new Knight(7,piece.GetJ(),pieces, piece.GetColor(),  new ImageView(MainActivity.this));
-                        layoutParamsP = NewLayout();
-                        layoutParamsP.width = width/8;
-                        layoutParamsP.height = width/8;
-                        layoutParamsP.addRule(RelativeLayout.BELOW, R.id.imageView14);
-                        layoutParamsP.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-                        myRelativeLayout.addView(pieces[7][piece.GetJ()].GetImageView(), layoutParamsP);
-                        layoutParamsP.topMargin = width/6 + (width/8)*(piece.GetI()-1);
-                        layoutParamsP.rightMargin = (width/8)*(7- piece.GetJ());
-                        PBQ.setVisibility(View.INVISIBLE);
-                        PBQ.setClickable(false);
-                        PBB.setVisibility(View.INVISIBLE);
-                        PBB.setClickable(false);
-                        PBR.setVisibility(View.INVISIBLE);
-                        PBR.setClickable(false);
-                        PBKN.setVisibility(View.INVISIBLE);
-                        PBKN.setClickable(false);
-                        DidPromote = false;
-                    }
-                });
+            DidPromote = true;
+            PBQ.setVisibility(View.VISIBLE);
+            PBQ.setClickable(true);
+            PBB.setVisibility(View.VISIBLE);
+            PBB.setClickable(true);
+            PBR.setVisibility(View.VISIBLE);
+            PBR.setClickable(true);
+            PBKN.setVisibility(View.VISIBLE);
+            PBKN.setClickable(true);
+            PBQ.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    RelativeLayout.LayoutParams layoutParamsP = NewLayout();
+                    RemoveEatenPiece(7, piece.GetJ());
+                    pieces[7][piece.GetJ()] = new Queen(7,piece.GetJ(),pieces, piece.GetColor(),  new ImageView(MainActivity.this));
+                    layoutParamsP = NewLayout();
+                    layoutParamsP.width = width/8;
+                    layoutParamsP.height = width/8;
+                    layoutParamsP.addRule(RelativeLayout.BELOW, R.id.imageView14);
+                    layoutParamsP.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                    myRelativeLayout.addView(pieces[7][piece.GetJ()].GetImageView(), layoutParamsP);
+                    layoutParamsP.topMargin = width/6 + (width/8)*(piece.GetI()-1);
+                    layoutParamsP.rightMargin = (width/8)*(7- piece.GetJ());
+                    PBQ.setVisibility(View.INVISIBLE);
+                    PBQ.setClickable(false);
+                    PBB.setVisibility(View.INVISIBLE);
+                    PBB.setClickable(false);
+                    PBR.setVisibility(View.INVISIBLE);
+                    PBR.setClickable(false);
+                    PBKN.setVisibility(View.INVISIBLE);
+                    PBKN.setClickable(false);
+                    DidPromote = false;
+                }
+            });
+            PBB.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    RelativeLayout.LayoutParams layoutParamsP = NewLayout();
+                    RemoveEatenPiece(7, piece.GetJ());
+                    pieces[7][piece.GetJ()] = new Bishop(7,piece.GetJ(),pieces, piece.GetColor(),  new ImageView(MainActivity.this));
+                    layoutParamsP = NewLayout();
+                    layoutParamsP.width = width/8;
+                    layoutParamsP.height = width/8;
+                    layoutParamsP.addRule(RelativeLayout.BELOW, R.id.imageView14);
+                    layoutParamsP.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                    myRelativeLayout.addView(pieces[7][piece.GetJ()].GetImageView(), layoutParamsP);
+                    layoutParamsP.topMargin = width/6 + (width/8)*(piece.GetI()-1);
+                    layoutParamsP.rightMargin = (width/8)*(7- piece.GetJ());
+                    PBQ.setVisibility(View.INVISIBLE);
+                    PBQ.setClickable(false);
+                    PBB.setVisibility(View.INVISIBLE);
+                    PBB.setClickable(false);
+                    PBR.setVisibility(View.INVISIBLE);
+                    PBR.setClickable(false);
+                    PBKN.setVisibility(View.INVISIBLE);
+                    PBKN.setClickable(false);
+                    DidPromote = false;
+                }
+            });
+            PBR.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    RelativeLayout.LayoutParams layoutParamsP = NewLayout();
+                    RemoveEatenPiece(7, piece.GetJ());
+                    pieces[7][piece.GetJ()] = new Rook(7,piece.GetJ(),pieces, piece.GetColor(),  new ImageView(MainActivity.this));
+                    layoutParamsP = NewLayout();
+                    layoutParamsP.width = width/16;
+                    layoutParamsP.height = width/16;
+                    layoutParamsP.addRule(RelativeLayout.BELOW, R.id.imageView14);
+                    layoutParamsP.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                    myRelativeLayout.addView(pieces[7][piece.GetJ()].GetImageView(), layoutParamsP);
+                    layoutParamsP.topMargin = width/6 + (width/8)*(piece.GetI()-1);
+                    layoutParamsP.rightMargin = (width/8)*(7- piece.GetJ());
+                    PBQ.setVisibility(View.INVISIBLE);
+                    PBQ.setClickable(false);
+                    PBB.setVisibility(View.INVISIBLE);
+                    PBB.setClickable(false);
+                    PBR.setVisibility(View.INVISIBLE);
+                    PBR.setClickable(false);
+                    PBKN.setVisibility(View.INVISIBLE);
+                    PBKN.setClickable(false);
+                    DidPromote = false;
+                }
+            });
+            PBKN.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    RelativeLayout.LayoutParams layoutParamsP = NewLayout();
+                    RemoveEatenPiece(7, piece.GetJ());
+                    pieces[7][piece.GetJ()] = new Knight(7,piece.GetJ(),pieces, piece.GetColor(),  new ImageView(MainActivity.this));
+                    layoutParamsP = NewLayout();
+                    layoutParamsP.width = width/8;
+                    layoutParamsP.height = width/8;
+                    layoutParamsP.addRule(RelativeLayout.BELOW, R.id.imageView14);
+                    layoutParamsP.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                    myRelativeLayout.addView(pieces[7][piece.GetJ()].GetImageView(), layoutParamsP);
+                    layoutParamsP.topMargin = width/6 + (width/8)*(piece.GetI()-1);
+                    layoutParamsP.rightMargin = (width/8)*(7- piece.GetJ());
+                    PBQ.setVisibility(View.INVISIBLE);
+                    PBQ.setClickable(false);
+                    PBB.setVisibility(View.INVISIBLE);
+                    PBB.setClickable(false);
+                    PBR.setVisibility(View.INVISIBLE);
+                    PBR.setClickable(false);
+                    PBKN.setVisibility(View.INVISIBLE);
+                    PBKN.setClickable(false);
+                    DidPromote = false;
+                }
+            });
 
-            }
-            if (piece.GetI() == 0)
-            {
-                DidPromote = true;
-                PWQ.setVisibility(View.VISIBLE);
-                PWQ.setClickable(true);
-                PWB.setVisibility(View.VISIBLE);
-                PWB.setClickable(true);
-                PWR.setVisibility(View.VISIBLE);
-                PWR.setClickable(true);
-                PWKN.setVisibility(View.VISIBLE);
-                PWKN.setClickable(true);
-                PWQ.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        RelativeLayout.LayoutParams layoutParamsP = NewLayout();
-                        RemoveEatenPiece(0, piece.GetJ());
-                        pieces[0][piece.GetJ()] = new Queen(0,piece.GetJ(),pieces, piece.GetColor(),  new ImageView(MainActivity.this));
-                        layoutParamsP = NewLayout();
-                        layoutParamsP.width = width/8;
-                        layoutParamsP.height = width/8;
-                        layoutParamsP.addRule(RelativeLayout.BELOW, R.id.imageView14);
-                        layoutParamsP.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-                        myRelativeLayout.addView(pieces[0][piece.GetJ()].GetImageView(), layoutParamsP);
-                        layoutParamsP.topMargin = width/6 + (width/8)*(piece.GetI()-1);
-                        layoutParamsP.rightMargin = (width/8)*(7- piece.GetJ());
-                        PWQ.setVisibility(View.INVISIBLE);
-                        PWQ.setClickable(false);
-                        PWB.setVisibility(View.INVISIBLE);
-                        PWB.setClickable(false);
-                        PWR.setVisibility(View.INVISIBLE);
-                        PWR.setClickable(false);
-                        PWKN.setVisibility(View.INVISIBLE);
-                        PWKN.setClickable(false);
-                        DidPromote = false;
-                    }
-                });
-                PWB.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        RelativeLayout.LayoutParams layoutParamsP = NewLayout();
-                        RemoveEatenPiece(0, piece.GetJ());
-                        pieces[0][piece.GetJ()] = new Bishop(0,piece.GetJ(),pieces, piece.GetColor(),  new ImageView(MainActivity.this));
-                        layoutParamsP = NewLayout();
-                        layoutParamsP.width = width/8;
-                        layoutParamsP.height = width/8;
-                        layoutParamsP.addRule(RelativeLayout.BELOW, R.id.imageView14);
-                        layoutParamsP.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-                        myRelativeLayout.addView(pieces[0][piece.GetJ()].GetImageView(), layoutParamsP);
-                        layoutParamsP.topMargin = width/6 + (width/8)*(piece.GetI()-1);
-                        layoutParamsP.rightMargin = (width/8)*(7- piece.GetJ());
-                        PWQ.setVisibility(View.INVISIBLE);
-                        PWQ.setClickable(false);
-                        PWB.setVisibility(View.INVISIBLE);
-                        PWB.setClickable(false);
-                        PWR.setVisibility(View.INVISIBLE);
-                        PWR.setClickable(false);
-                        PWKN.setVisibility(View.INVISIBLE);
-                        PWKN.setClickable(false);
-                        DidPromote = false;
-                    }
-                });
-                PWR.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        RelativeLayout.LayoutParams layoutParamsP = NewLayout();
-                        RemoveEatenPiece(0, piece.GetJ());
-                        pieces[0][piece.GetJ()] = new Rook(0,piece.GetJ(),pieces, piece.GetColor(),  new ImageView(MainActivity.this));
-                        layoutParamsP = NewLayout();
-                        layoutParamsP.width = width/8;
-                        layoutParamsP.height = width/8;
-                        layoutParamsP.addRule(RelativeLayout.BELOW, R.id.imageView14);
-                        layoutParamsP.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-                        myRelativeLayout.addView(pieces[0][piece.GetJ()].GetImageView(), layoutParamsP);
-                        layoutParamsP.topMargin = width/6 + (width/8)*(piece.GetI()-1);
-                        layoutParamsP.rightMargin = (width/8)*(7- piece.GetJ());
-                        PWQ.setVisibility(View.INVISIBLE);
-                        PWQ.setClickable(false);
-                        PWB.setVisibility(View.INVISIBLE);
-                        PWB.setClickable(false);
-                        PWR.setVisibility(View.INVISIBLE);
-                        PWR.setClickable(false);
-                        PWKN.setVisibility(View.INVISIBLE);
-                        PWKN.setClickable(false);
-                        DidPromote = false;
-                    }
-                });
-                PWKN.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        RelativeLayout.LayoutParams layoutParamsP = NewLayout();
-                        RemoveEatenPiece(0, piece.GetJ());
-                        pieces[0][piece.GetJ()] = new Knight(0,piece.GetJ(),pieces, piece.GetColor(),  new ImageView(MainActivity.this));
-                        layoutParamsP = NewLayout();
-                        layoutParamsP.width = width/8;
-                        layoutParamsP.height = width/8;
-                        layoutParamsP.addRule(RelativeLayout.BELOW, R.id.imageView14);
-                        layoutParamsP.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-                        myRelativeLayout.addView(pieces[0][piece.GetJ()].GetImageView(), layoutParamsP);
-                        layoutParamsP.topMargin = width/6 + (width/8)*(piece.GetI()-1);
-                        layoutParamsP.rightMargin = (width/8)*(7- piece.GetJ());
-                        PWQ.setVisibility(View.INVISIBLE);
-                        PWQ.setClickable(false);
-                        PWB.setVisibility(View.INVISIBLE);
-                        PWB.setClickable(false);
-                        PWR.setVisibility(View.INVISIBLE);
-                        PWR.setClickable(false);
-                        PWKN.setVisibility(View.INVISIBLE);
-                        PWKN.setClickable(false);
-                        DidPromote = false;
-                    }
-                });
-            }
+        }
+        if (piece.GetI() == 0)
+        {
+            DidPromote = true;
+            PWQ.setVisibility(View.VISIBLE);
+            PWQ.setClickable(true);
+            PWB.setVisibility(View.VISIBLE);
+            PWB.setClickable(true);
+            PWR.setVisibility(View.VISIBLE);
+            PWR.setClickable(true);
+            PWKN.setVisibility(View.VISIBLE);
+            PWKN.setClickable(true);
+            PWQ.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    RelativeLayout.LayoutParams layoutParamsP = NewLayout();
+                    RemoveEatenPiece(0, piece.GetJ());
+                    pieces[0][piece.GetJ()] = new Queen(0,piece.GetJ(),pieces, piece.GetColor(),  new ImageView(MainActivity.this));
+                    layoutParamsP = NewLayout();
+                    layoutParamsP.width = width/8;
+                    layoutParamsP.height = width/8;
+                    layoutParamsP.addRule(RelativeLayout.BELOW, R.id.imageView14);
+                    layoutParamsP.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                    myRelativeLayout.addView(pieces[0][piece.GetJ()].GetImageView(), layoutParamsP);
+                    layoutParamsP.topMargin = width/6 + (width/8)*(piece.GetI()-1);
+                    layoutParamsP.rightMargin = (width/8)*(7- piece.GetJ());
+                    PWQ.setVisibility(View.INVISIBLE);
+                    PWQ.setClickable(false);
+                    PWB.setVisibility(View.INVISIBLE);
+                    PWB.setClickable(false);
+                    PWR.setVisibility(View.INVISIBLE);
+                    PWR.setClickable(false);
+                    PWKN.setVisibility(View.INVISIBLE);
+                    PWKN.setClickable(false);
+                    DidPromote = false;
+                }
+            });
+            PWB.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    RelativeLayout.LayoutParams layoutParamsP = NewLayout();
+                    RemoveEatenPiece(0, piece.GetJ());
+                    pieces[0][piece.GetJ()] = new Bishop(0,piece.GetJ(),pieces, piece.GetColor(),  new ImageView(MainActivity.this));
+                    layoutParamsP = NewLayout();
+                    layoutParamsP.width = width/8;
+                    layoutParamsP.height = width/8;
+                    layoutParamsP.addRule(RelativeLayout.BELOW, R.id.imageView14);
+                    layoutParamsP.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                    myRelativeLayout.addView(pieces[0][piece.GetJ()].GetImageView(), layoutParamsP);
+                    layoutParamsP.topMargin = width/6 + (width/8)*(piece.GetI()-1);
+                    layoutParamsP.rightMargin = (width/8)*(7- piece.GetJ());
+                    PWQ.setVisibility(View.INVISIBLE);
+                    PWQ.setClickable(false);
+                    PWB.setVisibility(View.INVISIBLE);
+                    PWB.setClickable(false);
+                    PWR.setVisibility(View.INVISIBLE);
+                    PWR.setClickable(false);
+                    PWKN.setVisibility(View.INVISIBLE);
+                    PWKN.setClickable(false);
+                    DidPromote = false;
+                }
+            });
+            PWR.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    RelativeLayout.LayoutParams layoutParamsP = NewLayout();
+                    RemoveEatenPiece(0, piece.GetJ());
+                    pieces[0][piece.GetJ()] = new Rook(0,piece.GetJ(),pieces, piece.GetColor(),  new ImageView(MainActivity.this));
+                    layoutParamsP = NewLayout();
+                    layoutParamsP.width = width/8;
+                    layoutParamsP.height = width/8;
+                    layoutParamsP.addRule(RelativeLayout.BELOW, R.id.imageView14);
+                    layoutParamsP.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                    myRelativeLayout.addView(pieces[0][piece.GetJ()].GetImageView(), layoutParamsP);
+                    layoutParamsP.topMargin = width/6 + (width/8)*(piece.GetI()-1);
+                    layoutParamsP.rightMargin = (width/8)*(7- piece.GetJ());
+                    PWQ.setVisibility(View.INVISIBLE);
+                    PWQ.setClickable(false);
+                    PWB.setVisibility(View.INVISIBLE);
+                    PWB.setClickable(false);
+                    PWR.setVisibility(View.INVISIBLE);
+                    PWR.setClickable(false);
+                    PWKN.setVisibility(View.INVISIBLE);
+                    PWKN.setClickable(false);
+                    DidPromote = false;
+                }
+            });
+            PWKN.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    RelativeLayout.LayoutParams layoutParamsP = NewLayout();
+                    RemoveEatenPiece(0, piece.GetJ());
+                    pieces[0][piece.GetJ()] = new Knight(0,piece.GetJ(),pieces, piece.GetColor(),  new ImageView(MainActivity.this));
+                    layoutParamsP = NewLayout();
+                    layoutParamsP.width = width/8;
+                    layoutParamsP.height = width/8;
+                    layoutParamsP.addRule(RelativeLayout.BELOW, R.id.imageView14);
+                    layoutParamsP.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                    myRelativeLayout.addView(pieces[0][piece.GetJ()].GetImageView(), layoutParamsP);
+                    layoutParamsP.topMargin = width/6 + (width/8)*(piece.GetI()-1);
+                    layoutParamsP.rightMargin = (width/8)*(7- piece.GetJ());
+                    PWQ.setVisibility(View.INVISIBLE);
+                    PWQ.setClickable(false);
+                    PWB.setVisibility(View.INVISIBLE);
+                    PWB.setClickable(false);
+                    PWR.setVisibility(View.INVISIBLE);
+                    PWR.setClickable(false);
+                    PWKN.setVisibility(View.INVISIBLE);
+                    PWKN.setClickable(false);
+                    DidPromote = false;
+                }
+            });
         }
     }
 }
