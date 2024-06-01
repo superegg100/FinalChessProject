@@ -86,7 +86,7 @@ public class Introduction extends AppCompatActivity {
                     blackImage.setVisibility(View.VISIBLE);
                 }
                 else{
-                    Toast.makeText(Introduction.this, "Name needs to be between 3-12 characters long and consist of letters and numbers only !", Toast.LENGTH_SHORT).show();
+                    blackNameInput.setError("Name needs to be between 3-12 characters long and consist of letters and numbers only !");
                 }
             }
         });
@@ -106,7 +106,7 @@ public class Introduction extends AppCompatActivity {
                     whiteImage.setVisibility(View.VISIBLE);
                 }
                 else{
-                    Toast.makeText(Introduction.this, "Name needs to be between 3-12 characters long and consist of letters and numbers only !", Toast.LENGTH_SHORT).show();
+                    blackNameInput.setError("Name needs to be between 3-12 characters long and consist of letters and numbers only !");
                 }
             }
         });

@@ -80,7 +80,7 @@ public class ManageTimer extends AppCompatActivity {
         setBlack_t.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isNumeric(blackNameInput_t.getText().toString())){
+                if (isNumeric(blackNameInput_t.getText().toString()) && !blackNameInput_t.getText().toString().isEmpty() && Integer.parseInt(blackNameInput_t.getText().toString()) > 0){
                     if (Long.parseLong(blackNameInput_t.getText().toString()) > 40)
                     {
                         BlackTime = 40;
@@ -102,7 +102,7 @@ public class ManageTimer extends AppCompatActivity {
                     blackImage_t.setVisibility(View.VISIBLE);
                 }
                 else{
-                    Toast.makeText(ManageTimer.this, "Enter the number of minutes !", Toast.LENGTH_SHORT).show();
+                    whiteNameInput_t.setError("Enter the number of minutes !");
                 }
             }
         });
@@ -110,7 +110,7 @@ public class ManageTimer extends AppCompatActivity {
         setWhite_t.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isNumeric(whiteNameInput_t.getText().toString())){
+                if (isNumeric(whiteNameInput_t.getText().toString()) && !whiteNameInput_t.getText().toString().isEmpty() && Integer.parseInt(whiteNameInput_t.getText().toString()) > 0){
                     if (Long.parseLong(whiteNameInput_t.getText().toString()) > 40)
                     {
                         WhiteTime = 40;
@@ -132,7 +132,7 @@ public class ManageTimer extends AppCompatActivity {
                     whiteImage_t.setVisibility(View.VISIBLE);
                 }
                 else{
-                    Toast.makeText(ManageTimer.this, "Enter the number of minutes !", Toast.LENGTH_SHORT).show();
+                    whiteNameInput_t.setError("Enter the number of minutes !");
                 }
             }
         });
