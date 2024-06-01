@@ -78,7 +78,8 @@ public class Piece {
     }
 
     // Method to check if a piece is under check from an opponent's piece
-    public boolean IsChecked(Piece king) {
+    public boolean IsChecked(King king) {
+        System.out.println(king.GetI() + "#####" + king.GetJ());
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (this.board[i][j].GetColor() != king.GetColor()) {
@@ -92,11 +93,11 @@ public class Piece {
     }
 
     // Method to find the king of a specific color on the board
-    public Piece FindKing(String color){
+    public King FindKing(String color){
         for (int i = 0; i < this.board.length; i++) {
             for (int j = 0; j < this.board.length; j++) {
                 if (this.board[i][j] instanceof King && this.board[i][j].GetColor().equals(color)){
-                    return this.board[i][j];  // Return the king piece
+                    return (King)this.board[i][j];  // Return the king piece
                 }
             }
         }
@@ -117,6 +118,10 @@ public class Piece {
         if (i > 7 || i < 0){return true;}  // Check if row index is out of bounds
         if (j > 7 || j < 0){return true;}  // Check if column index is out of bounds
 
+        if (this.board[i][j].GetColor() == piece.GetColor())
+        {
+            return true;
+        }
         boolean ischecked;
         int saveI = piece.GetI(),saveJ = piece.GetJ();
         Piece temp = this.board[i][j];

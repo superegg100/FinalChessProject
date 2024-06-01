@@ -183,7 +183,6 @@ public class ManageTimer extends AppCompatActivity {
         });
     }
 
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -199,7 +198,6 @@ public class ManageTimer extends AppCompatActivity {
             isServiceBound = false;
         }
     }
-
     @Override
     protected void onPause() {
         super.onPause();
@@ -207,7 +205,6 @@ public class ManageTimer extends AppCompatActivity {
             mediaPlayerService.pauseMusic();
         }
     }
-
     @Override
     protected void onResume() {
         super.onResume();

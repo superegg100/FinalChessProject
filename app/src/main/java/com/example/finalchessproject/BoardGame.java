@@ -11,6 +11,7 @@ public class BoardGame extends View {
     Square[][] board;  // 2D array to store squares of the board
     int offset;  // Height of the offset
     Context context;
+    int widthOfBoard;
 
     // Constructor for BoardGame class
     public BoardGame(Context context, int offset){
@@ -18,6 +19,7 @@ public class BoardGame extends View {
         this.context = context;
         board = new Square[size][size];  // Initialize the board
         this.offset = offset;  // Set the canvas height
+        this.widthOfBoard = 0;
     }
 
     public Square[][] getBoard() {
@@ -27,14 +29,14 @@ public class BoardGame extends View {
     @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
-        drawBoard(canvas, this.offset);  // Draw the board on the canvas
+        drawBoard(canvas);  // Draw the board on the canvas
     }
 
     // Method to draw the board on the canvas
-    public void drawBoard(Canvas canvas, int offset){
+    public void drawBoard(Canvas canvas){
         int canvasWidth = canvas.getWidth();  // Get the width of the canvas
         int size = 8;  // Size of the board (8x8)
-        int squareSize = canvasWidth / size;  // Calculate the size of each square
+        int squareSize = canvasWidth / size; // Calculate the size of each square
 
         // Loop through each square on the board
         for (int i = 0; i < board.length; i++){

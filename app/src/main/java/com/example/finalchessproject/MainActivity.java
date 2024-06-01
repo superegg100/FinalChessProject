@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         PWKN.setClickable(false);
         PWKN.setVisibility(View.INVISIBLE);
 
-        boardGame = new BoardGame(this, displayMetrics.widthPixels/6);
+        boardGame = new BoardGame(this, width/6);
 
         frame.addView(boardGame);
         pieces = new Piece[8][8];
@@ -238,6 +238,8 @@ public class MainActivity extends AppCompatActivity {
         pieces[7][4] = new King(7,4,pieces, "white", new ImageView(MainActivity.this));
         AddToScreen(width/16, width/16, pieces[7][4].GetImageView());
 
+
+
         for (int j = 0; j<8; j++){
             pieces[1][j] = new Pawn(1,j,pieces, "black", new ImageView(MainActivity.this));
             AddToScreen(width/16, width/16, pieces[1][j].GetImageView());
@@ -276,8 +278,6 @@ public class MainActivity extends AppCompatActivity {
                 pieces[i][j].GetImageView().setClickable(false);
             }
         }
-
-        king = (King)FindKing("black");
 
         startTimer(true);
         showTurn(true);
@@ -353,7 +353,7 @@ public class MainActivity extends AppCompatActivity {
     public Piece FindKing(String color){
         for (int i = 0; i < pieces.length; i++) {
             for (int j = 0; j < pieces.length; j++) {
-                if (pieces[i][j] instanceof King && pieces[i][j].GetColor() == color){
+                if (pieces[i][j] instanceof King && pieces[i][j].GetColor().equals(color)){
                     return pieces[i][j];
                 }
             }
@@ -377,7 +377,7 @@ public class MainActivity extends AppCompatActivity {
     }
     // checks if hte piece can move to the square that i wants and i yes moves it there and check for check mate if not it returns false
     public void ActualMove(Piece piece, int i, int j){
-        King king1 = FindKingColor(piece.GetColor());
+        King king1 = FindOtherKingColor(piece.GetColor());
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int width = displayMetrics.widthPixels;
@@ -566,7 +566,7 @@ public class MainActivity extends AppCompatActivity {
         int width = displayMetrics.widthPixels;
         int x,y;
         if (event.getAction() == MotionEvent.ACTION_DOWN){
-            if (event.getX() <= width && event.getX() > 0 && event.getY() > width/6 && event.getY() <= width/6  + width){
+            if (event.getX() <= width && event.getX() > 0 && event.getY() > width/6 && event.getY() <= width/6  + width + width/18){
                 x =  (int)event.getX() - (int)event.getX() % (width/8);
                 y = ((int)event.getY() - (int)event.getY() % (width/8)) - (width/6);
                 SaveY = y/(width/8);
@@ -632,7 +632,7 @@ public class MainActivity extends AppCompatActivity {
                 boolean isChecked = chosenPiece.IsChecked(king_instance);
                 for (int i = 0; i < 8; i++) {
                     for (int j = 0; j < 8; j++) {
-                        if (chosenPiece.CanMove(pieces[i][j], true)) {
+                        if (chosenPiece.CanMove(pieces[i][j], false)) {
                             possibleMoves[i][j].getGrayCircle().setVisibility(View.VISIBLE);
                         }
                     }
@@ -647,7 +647,7 @@ public class MainActivity extends AppCompatActivity {
                 boolean isChecked = chosenPiece.IsChecked(king_instance);
                 for (int i = 0; i < 8; i++) {
                     for (int j = 0; j < 8; j++) {
-                        if (chosenPiece.CanMove(pieces[i][j], true)) {
+                        if (chosenPiece.CanMove(pieces[i][j], false)) {
                             possibleMoves[i][j].getGrayCircle().setVisibility(View.VISIBLE);
                         }
                     }
@@ -769,7 +769,7 @@ public class MainActivity extends AppCompatActivity {
     public void RemoveEatenPiece(int i, int j){
         myRelativeLayout.removeView(pieces[i][j].GetImageView());
     }
-    public King FindKingColor(String color){
+    public King FindOtherKingColor(String color){
         if (color == "white"){
             return  (King)FindKing("black");
         }

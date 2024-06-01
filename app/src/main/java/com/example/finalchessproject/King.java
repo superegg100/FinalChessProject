@@ -148,7 +148,7 @@ public class King extends Piece {
         if (super.GetI()+1 < 8 && !(super.GetBoard()[super.GetI()+1][super.GetJ()].GetColor() == super.GetColor()) && !IsPinned(super.GetI()+1, super.GetJ(), this)){System.out.println("nafalti in 1"); return false;}
         if (super.GetI()-1 >= 0 && !(super.GetBoard()[super.GetI()-1][super.GetJ()].GetColor() == super.GetColor()) && !IsPinned(super.GetI()-1, super.GetJ(), this)){System.out.println("nafalti in 2"); return false;}
 
-        if (super.GetI()+1 < 8 && super.GetJ()+1 < 8 && !(super.GetBoard()[super.GetI()+1][super.GetJ()+1].GetColor() == super.GetColor()) &&        !IsPinned(super.GetI()+1, super.GetJ()+1, this)){System.out.println("nafalti in 3"); return false;}
+        if (super.GetI()+1 < 8 && super.GetJ()+1 < 8 && !(super.GetBoard()[super.GetI()+1][super.GetJ()+1].GetColor() == super.GetColor()) && !IsPinned(super.GetI()+1, super.GetJ()+1, this)){System.out.println("nafalti in 3"); return false;}
         if (super.GetI()+1 < 8 && super.GetI()-1 >= 0 && !(super.GetBoard()[super.GetI()+1][super.GetJ()-1].GetColor() == super.GetColor()) && !IsPinned(super.GetI()+1, super.GetJ()-1, this)){System.out.println("nafalti in 4"); return false;}
 
         if (super.GetJ()+1 < 8 && !(super.GetBoard()[super.GetI()][super.GetJ()+1].GetColor() == super.GetColor()) && !IsPinned(super.GetI(), super.GetJ()+1, this)){System.out.println("nafalti in 5"); return false;}
