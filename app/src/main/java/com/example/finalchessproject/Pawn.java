@@ -53,7 +53,8 @@ public class Pawn extends Piece{
             this.IsEnPeasent = false;
             return true;
         }
-        if (piece.GetI() == super.GetI() + this.PawnInc && (piece.GetJ() == super.GetJ() +1 || piece.GetJ() == super.GetJ() - 1) && piece.HasPiece() && piece.GetColor() != super.GetColor()){
+        if (piece.GetI() == super.GetI() + this.PawnInc && (piece.GetJ() == super.GetJ() +1 || piece.GetJ() == super.GetJ() - 1) &&
+                piece.HasPiece() && piece.GetColor() != super.GetColor()){
             this.IsEnPeasent = false;
             return true;
         }
@@ -64,7 +65,8 @@ public class Pawn extends Piece{
                 return true;
             }
         }
-        if (piece.GetI() - this.PawnInc == super.GetI() && (piece.GetJ() == super.GetJ() + 1 || piece.GetJ() == super.GetJ() - 1) && super.GetBoard()[piece.GetI() - this.PawnInc][piece.GetJ()] instanceof Pawn
+        if (piece.GetI() - this.PawnInc == super.GetI() && (piece.GetJ() == super.GetJ() + 1 || piece.GetJ() == super.GetJ() - 1) &&
+                super.GetBoard()[piece.GetI() - this.PawnInc][piece.GetJ()] instanceof Pawn
                 && (super.GetI() == 3 || super.GetI() == 4)){
             Pawn EnPeasent = (Pawn) (super.GetBoard()[piece.GetI() - this.PawnInc][piece.GetJ()]);
             if (EnPeasent.NumOfMoves == 1){

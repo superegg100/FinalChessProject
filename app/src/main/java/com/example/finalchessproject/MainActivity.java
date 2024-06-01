@@ -20,8 +20,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-
-
 public class MainActivity extends AppCompatActivity {
     private static final String[] FILES = {"a", "b", "c", "d", "e", "f", "g", "h"};
     String whitePlayerName_FromIntent,whitePlayerTime_FromIntent, blackPlayerName_FromIntent, blackPlayerTime_FromIntent, winnerToDb;
@@ -191,151 +189,63 @@ public class MainActivity extends AppCompatActivity {
                 checkAlerts[i][j].getAlertIcon().setVisibility(View.INVISIBLE);
             }
         }
+
         pieces[0][0] = new Rook(0,0,pieces, "black", new ImageView(MainActivity.this));
-        layoutParams = NewLayout();
-        layoutParams.width = width/16;
-        layoutParams.height = width/16;
-        layoutParams.addRule(RelativeLayout.BELOW, R.id.imageView14);
-        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        myRelativeLayout.addView(pieces[0][0].GetImageView(), layoutParams);
-        pieces[0][0].GetImageView().setClickable(false);
+        AddToScreen(width/16, width/16, pieces[0][0].GetImageView());
+
         pieces[0][7] = new Rook(0,7,pieces, "black", new ImageView(MainActivity.this));
-        layoutParams = NewLayout();
-        layoutParams.width = width/16;
-        layoutParams.height = width/16;
-        layoutParams.addRule(RelativeLayout.BELOW, R.id.imageView14);
-        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        myRelativeLayout.addView(pieces[0][7].GetImageView(), layoutParams);
-        pieces[0][7].GetImageView().setClickable(false);
+        AddToScreen(width/16, width/16, pieces[0][7].GetImageView());
+
         pieces[7][0] = new Rook(7,0,pieces, "white", new ImageView(MainActivity.this));
-        layoutParams = NewLayout();
-        layoutParams.width = width/16;
-        layoutParams.height = width/16;
-        layoutParams.addRule(RelativeLayout.BELOW, R.id.imageView14);
-        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        myRelativeLayout.addView(pieces[7][0].GetImageView(), layoutParams);
-        pieces[7][0].GetImageView().setClickable(false);
+        AddToScreen(width/16, width/16, pieces[7][0].GetImageView());
+
         pieces[7][7] = new Rook(7,7,pieces, "white", new ImageView(MainActivity.this));
-        layoutParams = NewLayout();
-        layoutParams.width = width/16;
-        layoutParams.height = width/16;
-        layoutParams.addRule(RelativeLayout.BELOW, R.id.imageView14);
-        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        myRelativeLayout.addView(pieces[7][7].GetImageView(), layoutParams);
-        pieces[7][7].GetImageView().setClickable(false);
+        AddToScreen(width/16, width/16, pieces[7][7].GetImageView());
+
         pieces[0][1] = new Knight(0,1,pieces, "black", new ImageView(MainActivity.this));
-        layoutParams = NewLayout();
-        layoutParams.width = width/16;
-        layoutParams.height = width/16;
-        layoutParams.addRule(RelativeLayout.BELOW, R.id.imageView14);
-        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        myRelativeLayout.addView(pieces[0][1].GetImageView(), layoutParams);
-        pieces[0][1].GetImageView().setClickable(false);
+        AddToScreen(width/16, width/16, pieces[0][1].GetImageView());
+
         pieces[0][6] = new Knight(0,6,pieces, "black", new ImageView(MainActivity.this));
-        layoutParams = NewLayout();
-        layoutParams.width = width/16;
-        layoutParams.height = width/16;
-        layoutParams.addRule(RelativeLayout.BELOW, R.id.imageView14);
-        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        myRelativeLayout.addView(pieces[0][6].GetImageView(), layoutParams);
-        pieces[0][6].GetImageView().setClickable(false);
+        AddToScreen(width/16, width/16, pieces[0][6].GetImageView());
+
         pieces[7][1] = new Knight(7,1,pieces, "white", new ImageView(MainActivity.this));
-        layoutParams = NewLayout();
-        layoutParams.width = width/16;
-        layoutParams.height = width/16;
-        layoutParams.addRule(RelativeLayout.BELOW, R.id.imageView14);
-        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        myRelativeLayout.addView(pieces[7][1].GetImageView(), layoutParams);
-        pieces[7][1].GetImageView().setClickable(false);
+        AddToScreen(width/16, width/16, pieces[7][1].GetImageView());
+
         pieces[7][6] = new Knight(7,6,pieces, "white", new ImageView(MainActivity.this));
-        layoutParams = NewLayout();
-        layoutParams.width = width/16;
-        layoutParams.height = width/16;
-        layoutParams.addRule(RelativeLayout.BELOW, R.id.imageView14);
-        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        myRelativeLayout.addView(pieces[7][6].GetImageView(), layoutParams);
-        pieces[7][6].GetImageView().setClickable(false);
+        AddToScreen(width/16, width/16, pieces[7][6].GetImageView());
+
         pieces[0][2] = new Bishop(0,2,pieces, "black", new ImageView(MainActivity.this));
-        layoutParams = NewLayout();
-        layoutParams.width = width/16;
-        layoutParams.height = width/16;
-        layoutParams.addRule(RelativeLayout.BELOW, R.id.imageView14);
-        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        myRelativeLayout.addView(pieces[0][2].GetImageView(), layoutParams);
-        pieces[0][2].GetImageView().setClickable(false);
+        AddToScreen(width/16, width/16, pieces[0][2].GetImageView());
+
         pieces[0][5] = new Bishop(0,5,pieces, "black", new ImageView(MainActivity.this));
-        layoutParams = NewLayout();
-        layoutParams.width = width/16;
-        layoutParams.height = width/16;
-        layoutParams.addRule(RelativeLayout.BELOW, R.id.imageView14);
-        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        myRelativeLayout.addView(pieces[0][5].GetImageView(), layoutParams);
-        pieces[0][5].GetImageView().setClickable(false);
+        AddToScreen(width/16, width/16, pieces[0][5].GetImageView());
+
         pieces[7][2] = new Bishop(7,2,pieces, "white", new ImageView(MainActivity.this));
-        layoutParams = NewLayout();
-        layoutParams.width = width/16;
-        layoutParams.height = width/16;
-        layoutParams.addRule(RelativeLayout.BELOW, R.id.imageView14);
-        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        myRelativeLayout.addView(pieces[7][2].GetImageView(), layoutParams);
-        pieces[7][2].GetImageView().setClickable(false);
+        AddToScreen(width/16, width/16, pieces[7][2].GetImageView());
+
         pieces[7][5] = new Bishop(7,5,pieces, "white", new ImageView(MainActivity.this));
-        layoutParams = NewLayout();
-        layoutParams.width = width/16;
-        layoutParams.height = width/16;
-        layoutParams.addRule(RelativeLayout.BELOW, R.id.imageView14);
-        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        myRelativeLayout.addView(pieces[7][5].GetImageView(), layoutParams);
-        pieces[7][5].GetImageView().setClickable(false);
+        AddToScreen(width/16, width/16, pieces[7][5].GetImageView());
+
         pieces[0][3] = new Queen(0,3,pieces, "black", new ImageView(MainActivity.this));
-        layoutParams = NewLayout();
-        layoutParams.width = width/16;
-        layoutParams.height = width/16;
-        layoutParams.addRule(RelativeLayout.BELOW, R.id.imageView14);
-        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        myRelativeLayout.addView(pieces[0][3].GetImageView(), layoutParams);
-        pieces[0][3].GetImageView().setClickable(false);
+        AddToScreen(width/16, width/16, pieces[0][3].GetImageView());
+
         pieces[7][3] = new Queen(7,3,pieces, "white", new ImageView(MainActivity.this));
-        layoutParams = NewLayout();
-        layoutParams.width = width/16;
-        layoutParams.height = width/16;
-        layoutParams.addRule(RelativeLayout.BELOW, R.id.imageView14);
-        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        myRelativeLayout.addView(pieces[7][3].GetImageView(), layoutParams);
-        pieces[7][3].GetImageView().setClickable(false);
+        AddToScreen(width/16, width/16, pieces[7][3].GetImageView());
+
         pieces[0][4] = new King(0,4,pieces, "black", new ImageView(MainActivity.this));
-        layoutParams = NewLayout();
-        layoutParams.width = width/16;
-        layoutParams.height = width/16;
-        layoutParams.addRule(RelativeLayout.BELOW, R.id.imageView14);
-        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        myRelativeLayout.addView(pieces[0][4].GetImageView(), layoutParams);
-        pieces[0][4].GetImageView().setClickable(false);
+        AddToScreen(width/16, width/16, pieces[0][4].GetImageView());
+
         pieces[7][4] = new King(7,4,pieces, "white", new ImageView(MainActivity.this));
-        layoutParams = NewLayout();
-        layoutParams.width = width/16;
-        layoutParams.height = width/16;
-        layoutParams.addRule(RelativeLayout.BELOW, R.id.imageView14);
-        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        myRelativeLayout.addView(pieces[7][4].GetImageView(), layoutParams);
-        pieces[7][4].GetImageView().setClickable(false);
+        AddToScreen(width/16, width/16, pieces[7][4].GetImageView());
+
         for (int j = 0; j<8; j++){
             pieces[1][j] = new Pawn(1,j,pieces, "black", new ImageView(MainActivity.this));
-            layoutParams = NewLayout();
-            layoutParams.width = width/16;
-            layoutParams.height = width/16;
-            layoutParams.addRule(RelativeLayout.BELOW, R.id.imageView14);
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-            myRelativeLayout.addView(pieces[1][j].GetImageView(), layoutParams);
+            AddToScreen(width/16, width/16, pieces[1][j].GetImageView());
+
         }
         for (int j = 0; j<8; j++){
             pieces[6][j] = new Pawn(6,j,pieces, "white", new ImageView(MainActivity.this));
-            layoutParams = NewLayout();
-            layoutParams.width = width/16;
-            layoutParams.height = width/16;
-            layoutParams.addRule(RelativeLayout.BELOW, R.id.imageView14);
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-            myRelativeLayout.addView(pieces[6][j].GetImageView(), layoutParams);
+            AddToScreen(width/16, width/16, pieces[6][j].GetImageView());
         }
         for (int i = 2; i <= 5; i++){
             for(int j = 0; j < 8; j++){
@@ -372,6 +282,17 @@ public class MainActivity extends AppCompatActivity {
         startTimer(true);
         showTurn(true);
 
+    }
+
+    public void AddToScreen(int width, int height, ImageView image){
+        RelativeLayout.LayoutParams layoutParams;
+        layoutParams = NewLayout();
+        layoutParams.width = width;
+        layoutParams.height = height;
+        layoutParams.addRule(RelativeLayout.BELOW, R.id.imageView14);
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        myRelativeLayout.addView(image, layoutParams);
+        image.setClickable(false);
     }
 
     private void showTurn(boolean isWhiteTurn) {
@@ -643,7 +564,7 @@ public class MainActivity extends AppCompatActivity {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int width = displayMetrics.widthPixels;
-        int x=0,y=0;
+        int x,y;
         if (event.getAction() == MotionEvent.ACTION_DOWN){
             if (event.getX() <= width && event.getX() > 0 && event.getY() > width/6 && event.getY() <= width/6  + width){
                 x =  (int)event.getX() - (int)event.getX() % (width/8);
@@ -651,7 +572,6 @@ public class MainActivity extends AppCompatActivity {
                 SaveY = y/(width/8);
                 SaveX = x/(width/8);
                 if (IsClicked){
-                    boolean isChecked;
                     SaveI = SavePiece.GetI();
                     SaveJ = SavePiece.GetJ();
 
@@ -673,6 +593,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                         IsClicked = false;
+                        RemoveAllPossibleMoves();
                     }
                     else
                     {

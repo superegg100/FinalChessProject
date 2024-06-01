@@ -68,7 +68,7 @@ public class Rook extends Piece{
     }
     //Moves the piece
     public void Move(Piece piece, int i, int j){
-        this.GetBoard()[piece.GetI()][piece.GetJ()] = new Piece(piece.GetI(), piece.GetJ(), piece.GetBoard(),"gray", GetImageView());;
+        this.GetBoard()[piece.GetI()][piece.GetJ()] = new Piece(piece.GetI(), piece.GetJ(), piece.GetBoard(),"gray", GetImageView());
         this.GetBoard()[i][j] = piece;
         piece.SetI(i);
         piece.SetJ(j);
